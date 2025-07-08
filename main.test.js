@@ -1,9 +1,19 @@
 import { ship } from "./main.js";
 
 describe(`ship tests`, () => {
-    it(`ship data can be read during testing`, () => {
-        let instance = new ship();
+    let targetShip;
 
-        expect(instance.message).toBe("hello");
+    beforeEach(() => {
+        targetShip = new ship(2);
+    });
+
+    it(`hit() causes damage and returns remaining health`, () => {
+        expect(targetShip.hit()).toBe(1);
+    });
+
+    it(`hit() with one health causes ship to be sunk`, () => {
+        targetShip.hit();
+        targetShip.hit();
+        expect(targetShip.isSunk()).toBe(true);
     });
 });

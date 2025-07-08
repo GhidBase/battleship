@@ -13,3 +13,17 @@ export class ship {
         return this.hits == this.length;
     }
 }
+
+export class gameBoard {
+    constructor() {
+        this.coords = [];
+
+        for (let i = 0; i < 9; i++) {
+            this.coords[i] = [];
+        }
+    }
+
+    placeShip(x, y, newShip, direction) {
+        this.coords[x][y] = newShip;
+    }
+}

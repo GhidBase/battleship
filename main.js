@@ -1,4 +1,4 @@
-export class ship {
+export class Ship {
     constructor(length) {
         this.length = length;
         this.hits = 0;
@@ -16,12 +16,13 @@ export class ship {
     }
 }
 
-export class gameBoard {
+export class GameBoard {
     constructor() {
         this.coords = [];
+        this.ships = [];
 
-        for (let i = 0; i < 9; i++) {
-            this.coords[i] = [];
+        for (let i = 0; i < 10; i++) {
+            this.coords[i] = new Array(10);
         }
     }
 

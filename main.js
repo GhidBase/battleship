@@ -5,7 +5,9 @@ export class ship {
     }
 
     hit() {
-        this.hits++;
+        if (this.hits < this.length) {
+            this.hits++;
+        }
         return this.length - this.hits;
     }
 
@@ -23,7 +25,16 @@ export class gameBoard {
         }
     }
 
-    placeShip(x, y, newShip, direction) {
-        this.coords[x][y] = newShip;
+    placeShip(x, y, newShip, direction = "horizontal") {
+        // horizontal placement
+        if (direction == "horizontal") {
+            for (let i = x; i < x + newShip.length; i++) {
+                this.coords[i][y] = newShip;
+            }
+        } else if (direction == "vertical") {
+            for (let i = y; i < y + newShip.length; i++) {
+                this.coords[x][i] = newShip;
+            }
+        }
     }
 }

@@ -1,24 +1,24 @@
 import { Ship, GameBoard } from "./main.js";
 
-describe(`ship tests`, () => {
-    let targetShip;
-    let targetShip2;
-    let targetShip3;
+describe(`board tests`, () => {
     let board;
-
     beforeEach(() => {
-        targetShip = new Ship(2);
-        targetShip2 = new Ship(3);
-        targetShip3 = new Ship(5);
         board = new GameBoard();
-        board.placeShip(5, 4, targetShip, "horizontal");
-        board.placeShip(1, 1, targetShip2, "vertical");
-        board.placeShip(4, 0, targetShip3, "horizontal");
     });
 
     it(`board is 10x10 starting from 0`, () => {
         expect(board.coords[0].length).toBe(10);
         expect(board.coords[9].length).toBe(10);
+    });
+});
+
+describe(`ship hit functions`, () => {
+    let board;
+    let targetShip;
+
+    beforeEach(() => {
+        board = new GameBoard();
+        targetShip = new Ship(2);
     });
 
     it(`hit() causes damage and returns remaining health`, () => {
@@ -37,13 +37,27 @@ describe(`ship tests`, () => {
         targetShip.hit();
         expect(targetShip.hits).toBe(2);
     });
+});
+
+describe(`ship placement tests`, () => {
+    let targetShip;
+    let targetShip2;
+    let targetShip3;
+    let board;
+
+    beforeEach(() => {
+        board = new GameBoard();
+        board.placeShip(2, 5, 4, "horizontal");
+        board.placeShip(3, 1, 1, "vertical");
+        board.placeShip(5, 4, 0);
+    });
 
     it("Ship placement works", () => {
-        expect(board.coords[5][4]).toBe(targetShip);
+        expect(board.coords[5][4]).toBe(board.ships[0]);
     });
 
     it("Horizontal ship placement works", () => {
-        expect(board.coords[6][4]).toBe(targetShip);
+        expect(board.coords[6][4]).toBe(board.ships[0]);
     });
 
     it("Ship doesn't exceed set length", () => {
@@ -51,18 +65,22 @@ describe(`ship tests`, () => {
     });
 
     it("Vertical ship placement works", () => {
-        expect(board.coords[1][1]).toBe(targetShip2);
-        expect(board.coords[1][2]).toBe(targetShip2);
-        expect(board.coords[1][3]).toBe(targetShip2);
+        expect(board.coords[1][1]).toBe(board.ships[1]);
+        expect(board.coords[1][2]).toBe(board.ships[1]);
+        expect(board.coords[1][3]).toBe(board.ships[1]);
         expect(board.coords[1][4]).toBeFalsy();
     });
 
     it("Ship placement is horizontal by default", () => {
-        expect(board.coords[4][0]).toBe(targetShip3);
-        expect(board.coords[5][0]).toBe(targetShip3);
-        expect(board.coords[6][0]).toBe(targetShip3);
-        expect(board.coords[7][0]).toBe(targetShip3);
-        expect(board.coords[8][0]).toBe(targetShip3);
+        expect(board.coords[4][0]).toBe(board.ships[2]);
+        expect(board.coords[5][0]).toBe(board.ships[2]);
+        expect(board.coords[6][0]).toBe(board.ships[2]);
+        expect(board.coords[7][0]).toBe(board.ships[2]);
+        expect(board.coords[8][0]).toBe(board.ships[2]);
         expect(board.coords[9][0]).toBeFalsy();
     });
+
+    /* it("Can't place ships on other ships", () => {
+
+    }); */
 });

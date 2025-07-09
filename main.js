@@ -26,7 +26,9 @@ export class GameBoard {
         }
     }
 
-    placeShip(x, y, newShip, direction = "horizontal") {
+    placeShip(length, x, y, direction = "horizontal") {
+        let newShip = new Ship(length);
+        this.ships.push(newShip);
         // horizontal placement
         if (direction == "horizontal") {
             for (let i = x; i < x + newShip.length; i++) {

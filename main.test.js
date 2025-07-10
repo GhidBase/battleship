@@ -49,7 +49,11 @@ describe(`ship placement tests`, () => {
     });
 
     it("Ship placement works", () => {
-        expect(board.coords[5][4]).toBe(board.ships[0]);
+        board = new GameBoard();
+        expect(board.placeShip(5, 4, 2, "horizontal")).toBe(true);
+        expect(board.coords[6][4]).toBeTruthy();
+        expect(board.coords[6][4]).toBeTruthy();
+        expect(board.coords[7][4]).toBeUndefined();
     });
 
     it("Horizontal ship placement works", () => {
@@ -78,13 +82,15 @@ describe(`ship placement tests`, () => {
     });
 
     it("Ship placement can't go beyond the bounds of the board", () => {
-        expect(board.placeShip(7, 5, 7)).toBeFalsy();
-        expect(board.placeShip(8, 5, 2)).toBeFalsy();
-        expect(board.placeShip(0, 3, 7)).toBeTruthy();
-        expect(board.placeShip(-1, 0, 3)).toBeFalsy();
+        expect(() => board.placeShip(7, 5, 7)).toThrow();
+        expect(board.placeShip(8, 5, 2)).toBe(true);
+        expect(() => board.placeShip(-1, 0, 3)).toThrow();
     });
 
-    /* it("Can't place ships on other ships", () => {
-
-    }); */
+    it("Ships can't be placed on other ships", () => {
+        expect(board.placeShip(7, 7, 1)).toBeTruthy();
+        expect(() => board.placeShip(7, 7, 1)).toThrow(
+            `Cannot place ship: space already occupied 7,7`
+        );
+    });
 });

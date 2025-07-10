@@ -26,28 +26,70 @@ export class GameBoard {
         }
     }
 
-    placeShip(x, y, length, direction = "horizontal") {
+    coordsOutOfBounds(x, y, length, direction) {
         if (x < 0 || y < 0) {
+            return true;
+        }
+
+        if (direction == "horizontal") {
+            if (x + length - 1 > 9) {
+                return `out of bounds, largest x coord is ${x + length - 1}`;
+            }
+        }
+
+        if (direction == "vertical") {
+            if (y + length - 1 > 9) {
+                return `out of bounds, largest y coord is ${y + length - 1}`;
+            }
+        }
+
+        return false;
+    }
+
+    spacesOccupied(x, y, length, direction) {
+        if (direction == "horizontal") {
+            for (let i = x; i < x + length; i++) {
+                if (this.coords[i][y]) {
+                    return [i, y];
+                }
+            }
             return false;
+        } else if (direction == "vertical") {
+            for (let i = y; i < y + length; i++) {
+                if (this.coords[x][i]) {
+                    return [x, i];
+                }
+            }
+            return false;
+        }
+    }
+
+    placeShip(x, y, length, direction = "horizontal") {
+        let outOfBounds = this.coordsOutOfBounds(x, y, length, direction);
+        if (outOfBounds) {
+            throw new Error(
+                `Cannot place ship: ${outOfBounds}`
+            );
+        }
+
+        let occupied = this.spacesOccupied(x, y, length, direction);
+        if (occupied) {
+            throw new Error(
+                `Cannot place ship: space already occupied ${occupied}`
+            );
         }
 
         let newShip = new Ship(length);
         this.ships.push(newShip);
         // horizontal placement
         if (direction == "horizontal") {
-            if (x + newShip.length > 9) {
-                return false;
-            }
-
             for (let i = x; i < x + newShip.length; i++) {
                 this.coords[i][y] = newShip;
             }
             return true;
-        } else if (direction == "vertical") {
-            if (y + newShip.length > 9) {
-                return false;
-            }
+        }
 
+        if (direction == "vertical") {
             for (let i = y; i < y + newShip.length; i++) {
                 this.coords[x][i] = newShip;
             }

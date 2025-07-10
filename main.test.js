@@ -40,16 +40,12 @@ describe(`ship hit functions`, () => {
 });
 
 describe(`ship placement tests`, () => {
-    let targetShip;
-    let targetShip2;
-    let targetShip3;
     let board;
 
     beforeEach(() => {
         board = new GameBoard();
-        board.placeShip(2, 5, 4, "horizontal");
-        board.placeShip(3, 1, 1, "vertical");
-        board.placeShip(5, 4, 0);
+        board.placeShip(5, 4, 2, "horizontal");
+        board.placeShip(1, 1, 3, "vertical");
     });
 
     it("Ship placement works", () => {
@@ -72,12 +68,20 @@ describe(`ship placement tests`, () => {
     });
 
     it("Ship placement is horizontal by default", () => {
+        expect(board.placeShip(4, 0, 5)).toBeTruthy();
         expect(board.coords[4][0]).toBe(board.ships[2]);
         expect(board.coords[5][0]).toBe(board.ships[2]);
         expect(board.coords[6][0]).toBe(board.ships[2]);
         expect(board.coords[7][0]).toBe(board.ships[2]);
         expect(board.coords[8][0]).toBe(board.ships[2]);
         expect(board.coords[9][0]).toBeFalsy();
+    });
+
+    it("Ship placement can't go beyond the bounds of the board", () => {
+        expect(board.placeShip(7, 5, 7)).toBeFalsy();
+        expect(board.placeShip(8, 5, 2)).toBeFalsy();
+        expect(board.placeShip(0, 3, 7)).toBeTruthy();
+        expect(board.placeShip(-1, 0, 3)).toBeFalsy();
     });
 
     /* it("Can't place ships on other ships", () => {

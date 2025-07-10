@@ -26,18 +26,32 @@ export class GameBoard {
         }
     }
 
-    placeShip(length, x, y, direction = "horizontal") {
+    placeShip(x, y, length, direction = "horizontal") {
+        if (x < 0 || y < 0) {
+            return false;
+        }
+
         let newShip = new Ship(length);
         this.ships.push(newShip);
         // horizontal placement
         if (direction == "horizontal") {
+            if (x + newShip.length > 9) {
+                return false;
+            }
+
             for (let i = x; i < x + newShip.length; i++) {
                 this.coords[i][y] = newShip;
             }
+            return true;
         } else if (direction == "vertical") {
+            if (y + newShip.length > 9) {
+                return false;
+            }
+
             for (let i = y; i < y + newShip.length; i++) {
                 this.coords[x][i] = newShip;
             }
+            return true;
         }
     }
 }

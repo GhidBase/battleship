@@ -1,0 +1,21 @@
+:root {
+    --background: #272640;
+    --panel: #383659;
+}
+
+body {
+    background-color: var(--background);
+    width: 100dvw;
+    height: 100dvh;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 200px 1fr 200px;
+    grid-template-rows: 200px 1fr 200px;
+}
+
+.game-container {
+    grid-column: 2;
+    grid-row: 2;
+    background-color: var(--panel);
+    border-radius: 12px;
+}

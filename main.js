@@ -116,6 +116,7 @@ export class GameBoard {
 
         this.attacksReceived.push(`${x},${y}`);
         if (target) {
+            target.hit();
             return "hit";
         } else {
             return "miss";

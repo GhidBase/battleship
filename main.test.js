@@ -117,4 +117,10 @@ describe(`hit detection`, () => {
         expect(board.receiveAttack(3, 4)).toBe("miss");
         expect(board.receiveAttack(3, 4)).toBe("stale move");
     });
+
+    it("hits register damage on ships", () => {
+        let originalHits = board.ships[0].hits;
+        board.receiveAttack(4, 4);
+        expect(board.ships[0].hits).toBe(++originalHits);
+    });
 });

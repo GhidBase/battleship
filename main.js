@@ -122,4 +122,10 @@ export class GameBoard {
             return "miss";
         }
     }
+
+    allShipsSunk() {
+        return this.ships.every((currentShip) => {
+            return currentShip.isSunk();
+        });
+    }
 }

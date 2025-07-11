@@ -124,3 +124,27 @@ describe(`hit detection`, () => {
         expect(board.ships[0].hits).toBe(++originalHits);
     });
 });
+
+describe("sunk ship detection", () => {
+    let board;
+    beforeEach(() => {
+        board = new GameBoard();
+        board.placeShip(2, 2, 2);
+        board.placeShip(5, 5, 3);
+    });
+    it("all ships sunk", () => {
+        board.receiveAttack(2, 2);
+        board.receiveAttack(3, 2);
+        board.receiveAttack(5, 5);
+        board.receiveAttack(6, 5);
+        board.receiveAttack(7, 5);
+        expect(board.allShipsSunk()).toBe(true);
+    });
+
+    it("only the first ship sunk", () => {
+        board.receiveAttack(2, 2);
+        board.receiveAttack(3, 2);
+        expect(board.allShipsSunk()).toBe(false);
+        expect(board.ships[0].isSunk()).toBe(true);
+    });
+});

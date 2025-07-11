@@ -131,7 +131,13 @@ export class GameBoard {
 }
 
 export class Player {
-    constructor() {
+    constructor(type) {
         this.board = new GameBoard();
+        this.type = type; // real or computer
+        if (type != "real" && type != "computer") {
+            throw new Error(
+                'player objects must be of type "real" or "computer"'
+            );
+        }
     }
 }

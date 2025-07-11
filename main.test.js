@@ -1,4 +1,4 @@
-import { Ship, GameBoard } from "./game-objects.js";
+import { Ship, GameBoard, Player } from "./game-objects.js";
 
 describe(`board tests`, () => {
     let board;
@@ -146,5 +146,21 @@ describe("sunk ship detection", () => {
         board.receiveAttack(3, 2);
         expect(board.allShipsSunk()).toBe(false);
         expect(board.ships[0].isSunk()).toBe(true);
+    });
+});
+
+describe("player tests", () => {
+    it('player objects can only be "real" or "computer"', () => {
+        expect(() => {
+            new Player("human");
+        }).toThrow();
+
+        expect(() => {
+            new Player("real");
+        }).not.toThrow();
+
+        expect(() => {
+            new Player("computer");
+        }).not.toThrow();
     });
 });

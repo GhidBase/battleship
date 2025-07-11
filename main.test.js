@@ -39,7 +39,7 @@ describe(`ship hit functions`, () => {
     });
 });
 
-describe(`ship placement tests`, () => {
+describe(`ship placement`, () => {
     let board;
 
     beforeEach(() => {
@@ -92,5 +92,29 @@ describe(`ship placement tests`, () => {
         expect(() => board.placeShip(7, 7, 1)).toThrow(
             `Cannot place ship: space already occupied 7,7`
         );
+    });
+});
+
+describe(`hit detection`, () => {
+    let board;
+    beforeEach(() => {
+        board = new GameBoard();
+        board.placeShip(4, 4, 2); // x = 4, y = 4, goes to x = 5, y = 4
+    });
+
+    it("landed attack registers", () => {
+        expect(board.receiveAttack(4, 4)).toBe("hit");
+    });
+
+    it("missed attack registers", () => {
+        expect(board.receiveAttack(3, 4)).toBe("miss");
+    });
+
+    it("can't target a cell that was already attacked", () => {
+        expect(board.receiveAttack(4, 4)).toBe("hit");
+        expect(board.receiveAttack(4, 4)).toBe("stale move");
+
+        expect(board.receiveAttack(3, 4)).toBe("miss");
+        expect(board.receiveAttack(3, 4)).toBe("stale move");
     });
 });

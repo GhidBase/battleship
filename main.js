@@ -20,6 +20,7 @@ export class GameBoard {
     constructor() {
         this.coords = [];
         this.ships = [];
+        this.attacksReceived = [];
 
         for (let i = 0; i < 10; i++) {
             this.coords[i] = new Array(10);
@@ -46,7 +47,7 @@ export class GameBoard {
         return false;
     }
 
-    spacesOccupied(x, y, length, direction) {
+    spacesOccupiedByShip(x, y, length, direction) {
         if (direction == "horizontal") {
             for (let i = x; i < x + length; i++) {
                 if (
@@ -76,7 +77,7 @@ export class GameBoard {
             throw new Error(`Cannot place ship: ${outOfBounds}`);
         }
 
-        let occupied = this.spacesOccupied(x, y, length, direction);
+        let occupied = this.spacesOccupiedByShip(x, y, length, direction);
         if (occupied) {
             throw new Error(
                 `Cannot place ship: space already occupied ${occupied}`
@@ -98,6 +99,26 @@ export class GameBoard {
                 this.coords[x][i] = newShip;
             }
             return true;
+        }
+    }
+
+    receiveAttack(x, y) {
+        if (this.attacksReceived.includes(`${x},${y}`)) {
+            return "stale move";
+        }
+
+        let target = this.coords[x][y];
+
+        // I only test for a truthy value because
+        // the only truthy value stored on the board
+        // other than the ones in "attackReceived"
+        // are ships.
+
+        this.attacksReceived.push(`${x},${y}`);
+        if (target) {
+            return "hit";
+        } else {
+            return "miss";
         }
     }
 }

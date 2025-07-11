@@ -49,14 +49,20 @@ export class GameBoard {
     spacesOccupied(x, y, length, direction) {
         if (direction == "horizontal") {
             for (let i = x; i < x + length; i++) {
-                if (this.coords[i][y]) {
+                if (
+                    this.coords[i][y] &&
+                    this.ships.includes(this.coords[i][y])
+                ) {
                     return [i, y];
                 }
             }
             return false;
         } else if (direction == "vertical") {
             for (let i = y; i < y + length; i++) {
-                if (this.coords[x][i]) {
+                if (
+                    this.coords[x][i] &&
+                    this.ships.includes(this.coords[x][i])
+                ) {
                     return [x, i];
                 }
             }
@@ -67,9 +73,7 @@ export class GameBoard {
     placeShip(x, y, length, direction = "horizontal") {
         let outOfBounds = this.coordsOutOfBounds(x, y, length, direction);
         if (outOfBounds) {
-            throw new Error(
-                `Cannot place ship: ${outOfBounds}`
-            );
+            throw new Error(`Cannot place ship: ${outOfBounds}`);
         }
 
         let occupied = this.spacesOccupied(x, y, length, direction);

@@ -1,6 +1,10 @@
 :root {
     --background: #272640;
     --panel: #383659;
+    --game-board: #4f4d6e;
+    --miss: #3f3e4d;
+    --hit: #d93654;
+    --ship: #d9bb96;
 }
 
 body {
@@ -9,13 +13,44 @@ body {
     height: 100dvh;
     margin: 0;
     display: grid;
-    grid-template-columns: 200px 1fr 200px;
-    grid-template-rows: 200px 1fr 200px;
+    grid-template-columns: 1fr 500px 0.25fr 500px 1fr;
+    grid-template-rows: 1fr 500px 1fr;
 }
 
-.game-container {
+#player-1 {
     grid-column: 2;
     grid-row: 2;
-    background-color: var(--panel);
+}
+
+#player-2 {
+    grid-column: 4;
+    grid-row: 2;
+}
+
+.game-board {
+    background-color: var(--game-board);
     border-radius: 12px;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+}
+
+.cell {
+    border: black solid 1px;
+}
+
+.cell:hover {
+    background-color: var(--panel);
+}
+
+.cell.miss {
+    background-color: var(--miss);
+}
+
+.cell.ship {
+    background-color: var(--ship);
+}
+
+.cell.hit {
+    background-color: var(--hit);
 }

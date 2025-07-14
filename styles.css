@@ -12,22 +12,28 @@ body {
     width: 100dvw;
     height: 100dvh;
     margin: 0;
-    display: grid;
-    grid-template-columns: 1fr 500px 0.25fr 500px 1fr;
-    grid-template-rows: 1fr 500px 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-#player-1 {
-    grid-column: 2;
-    grid-row: 2;
-}
-
-#player-2 {
-    grid-column: 4;
-    grid-row: 2;
+.game-board-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10%;
+    height: 80dvh;
+    max-height:30dvw;
 }
 
 .game-board {
+    height: 100%;
+    max-height: 30dvw;
+    aspect-ratio: 1;
     background-color: var(--game-board);
     border-radius: 12px;
     display: grid;
@@ -53,4 +59,10 @@ body {
 
 .cell.hit {
     background-color: var(--hit);
+}
+
+#message-panel {
+    flex: 1;
+    width: 65dvw;
+    background-color: #4f4d6e;
 }

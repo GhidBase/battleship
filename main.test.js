@@ -1,4 +1,9 @@
+/**
+ * @jest-environment jsdom
+ */
 import { Ship, GameBoard, Player } from "./javascript/game-objects.js";
+import { UIController, Cell } from "./javascript/ui-controller.js";
+
 
 describe(`board tests`, () => {
     let board;

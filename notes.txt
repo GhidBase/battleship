@@ -2,3 +2,16 @@ Cell CSS to indicate the status of ships:
 .ship - display the location of a ship
 .ship.hit - a damaged section of ship
 .miss - already shot panel with no ship on it
+
+
+What are the steps to displaying the board?
+ - This will triggered by the ui-controller's constructor
+ - I need to create all the cells first.
+     - DONE - go to #player-1 and #player-2
+     - Done - clear the interal html
+     - Done - create an array for both. The array will be the x
+     coordinate. (left to right)
+     - Inside each array there will be another array, the
+     y coordinate. (top to bottom)
+     - every y coordinate is created by making a .cell element
+     and pushing a reference to it to the y coordinate array

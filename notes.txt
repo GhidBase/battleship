@@ -11,7 +11,9 @@ What are the steps to displaying the board?
      - Done - clear the interal html
      - Done - create an array for both. The array will be the x
      coordinate. (left to right)
-     - Inside each array there will be another array, the
+     - Done - Inside each array there will be another array, the
      y coordinate. (top to bottom)
-     - every y coordinate is created by making a .cell element
+     - Done - every y coordinate is created by making a .cell element
      and pushing a reference to it to the y coordinate array
+
+ - place ships needs to send a message to ui-controller

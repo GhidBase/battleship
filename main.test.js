@@ -1,4 +1,4 @@
-import { Ship, GameBoard, Player } from "./game-objects.js";
+import { Ship, GameBoard, Player } from "./javascript/game-objects.js";
 
 describe(`board tests`, () => {
     let board;

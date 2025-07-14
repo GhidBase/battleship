@@ -1,0 +1,4 @@
+Cell CSS to indicate the status of ships:
+.ship - display the location of a ship
+.ship.hit - a damaged section of ship
+.miss - already shot panel with no ship on it

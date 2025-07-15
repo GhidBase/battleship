@@ -27,3 +27,5 @@ What are the steps to displaying the board?
      - I should connect the ui cells to the game-controller
      - Connect the ui cells to the playerAction functions
      - have them display a console log
+
+     - Connect the game object board to the game-controller

@@ -1,4 +1,3 @@
-
 export class Ship {
     constructor(length) {
         this.length = length;
@@ -74,15 +73,23 @@ export class GameBoard {
 
     placeShip(x, y, length, direction = "horizontal") {
         let outOfBounds = this.coordsOutOfBounds(x, y, length, direction);
-        if (outOfBounds) {
-            throw new Error(`Cannot place ship: ${outOfBounds}`);
+        try {
+            if (outOfBounds) {
+                throw new Error(`Cannot place ship: (${outOfBounds})`);
+            }
+        } catch (error) {
+            console.error(error.message);
         }
 
         let occupied = this.spacesOccupiedByShip(x, y, length, direction);
-        if (occupied) {
-            throw new Error(
-                `Cannot place ship: space already occupied ${occupied}`
-            );
+        try {
+            if (occupied) {
+                throw new Error(
+                    `Cannot place ship: space already occupied (${occupied})`
+                );
+            }
+        } catch (error) {
+            console.error(error.message);
         }
 
         let newShip = new Ship(length);

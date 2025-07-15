@@ -17,3 +17,6 @@ What are the steps to displaying the board?
      and pushing a reference to it to the y coordinate array
 
  - place ships needs to send a message to ui-controller
+
+ - Need to use the length parameter on the draw ship function
+ - Set the direction parameter on draw ship

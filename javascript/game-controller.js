@@ -34,11 +34,10 @@ export class GameController {
             Only call the UIController to draw the ship if placement is successful.
             This keeps all game logic out of UIController and limits it to rendering only.
         */
-        if (player == 1) {
-            this.player1Board.placeShip(x, y, length, direction);
-            this.uiController.drawShip(player, x, y, length, direction);
-        } else if (player == 2) {
-            this.player2Board.placeShip(x, y, length, direction);
+        let board = player == 1 ? this.player1Board : this.player2Board;
+
+        let placeShip = board.placeShip(x, y, length, direction);
+        if (placeShip) {
             this.uiController.drawShip(player, x, y, length, direction);
         }
     }

@@ -79,6 +79,7 @@ export class GameBoard {
             }
         } catch (error) {
             console.error(error.message);
+            return false;
         }
 
         let occupied = this.spacesOccupiedByShip(x, y, length, direction);
@@ -90,6 +91,7 @@ export class GameBoard {
             }
         } catch (error) {
             console.error(error.message);
+            return false;
         }
 
         let newShip = new Ship(length);

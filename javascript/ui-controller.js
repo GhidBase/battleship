@@ -1,5 +1,8 @@
+// import { GameController } from "./game-controller.js";
+
 export class UIController {
-    constructor() {
+    constructor(gameController) {
+        this.gameController = gameController;
         this.player1 = document.getElementById("player-1");
         this.player1Cells = [];
         console.log(this.player1Cells);
@@ -31,6 +34,13 @@ export class UIController {
         let cell = document.createElement("div");
         cell.classList.add("cell");
         board.append(cell);
+        cell.addEventListener("click", () => {
+            if (board == this.player1) {
+                this.gameController.player1Action();
+            } else if (board == this.player2) {
+                this.gameController.player2Action();
+            }
+        });
         return cell;
     }
 

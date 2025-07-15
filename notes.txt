@@ -20,3 +20,10 @@ What are the steps to displaying the board?
 
  - Need to use the length parameter on the draw ship function
  - Set the direction parameter on draw ship
+
+ - Need to set event listeners on every cell
+     - Where would I set that? on the constructor
+     - The listener would have to be set in the ui-controller
+     - I should connect the ui cells to the game-controller
+     - Connect the ui cells to the playerAction functions
+     - have them display a console log

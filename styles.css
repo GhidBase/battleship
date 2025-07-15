@@ -19,6 +19,7 @@ body {
     gap: 20px;
     padding: 20px;
     box-sizing: border-box;
+    font-family: "Roboto";
 }
 
 .game-board-container {
@@ -27,7 +28,7 @@ body {
     align-items: center;
     gap: 10%;
     height: 80dvh;
-    max-height:30dvw;
+    max-height: 30dvw;
 }
 
 .game-board {
@@ -63,7 +64,14 @@ body {
 }
 
 #message-panel {
-    flex: 1;
     width: 65dvw;
     background-color: #4f4d6e;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#message-panel p {
+    margin: 20px;
+    font-size: 40px;
 }

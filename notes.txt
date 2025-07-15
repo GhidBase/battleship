@@ -29,3 +29,8 @@ What are the steps to displaying the board?
      - have them display a console log
 
      - Connect the game object board to the game-controller
+
+     - What am I trying to do? Make attacks work on event listener
+     - start with player2 attack since turn is 1
+     - what function applies an attack? gameBoard.receiveAttack()
+     - it returns hit or miss so log the result

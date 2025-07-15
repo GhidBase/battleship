@@ -18,27 +18,27 @@ export class UIController {
         for (let i = 0; i < 10; i++) {
             this.player1Cells.push([]);
             for (let j = 0; j < 10; j++) {
-                this.player1Cells[i].push(this.createCell(this.player1));
+                this.player1Cells[i].push(this.createCell(this.player1, i, j));
             }
         }
 
         for (let i = 0; i < 10; i++) {
             this.player2Cells.push([]);
             for (let j = 0; j < 10; j++) {
-                this.player2Cells[i].push(this.createCell(this.player2));
+                this.player2Cells[i].push(this.createCell(this.player2, i, j));
             }
         }
     }
 
-    createCell(board) {
+    createCell(board, x, y) {
         let cell = document.createElement("div");
         cell.classList.add("cell");
         board.append(cell);
         cell.addEventListener("click", () => {
             if (board == this.player1) {
-                this.gameController.player1Action();
+                this.gameController.player2Action(x, y);
             } else if (board == this.player2) {
-                this.gameController.player2Action();
+                this.gameController.player1Action(x, y);
             }
         });
         return cell;

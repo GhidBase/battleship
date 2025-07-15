@@ -42,18 +42,19 @@ export class GameController {
         }
     }
 
-    player1Action() {
-        console.log(`action 1`);
+    player1Action(x, y) {
         if (this.turn != 1) {
-            return;
+            return "other players turn";
         } else if (this.turn == 1) {
+            console.log(`player 1: ${this.player2Board.receiveAttack(x, y)}`);
         }
     }
 
     player2Action() {
-        console.log(`action 2`);
         if (this.turn != 2) {
-            return;
+            return "other players turn";
+        } else {
+            console.log(`player 2: ${this.player1Board.receiveAttack(x, y)}`);
         }
     }
 }

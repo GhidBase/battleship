@@ -34,3 +34,17 @@ What are the steps to displaying the board?
      - start with player2 attack since turn is 1
      - what function applies an attack? gameBoard.receiveAttack()
      - it returns hit or miss so log the result
+
+     I need a draw function for displaying hits and misses
+     styles are
+     .hit
+     .miss
+
+    In game-objects.js when receiveAttack() is called, I need to call
+    the UIController and set the UI in the corresponding cell for that
+
+    But I can't figure out how to access it.
+
+    What creates the GameBoard?
+    game-controlker.js
+    Pass in the ui controller as an arg

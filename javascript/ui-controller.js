@@ -67,6 +67,11 @@ export class UIController {
             return true;
         }
     }
+
+    drawHit(board, x, y) {
+        let playerCells = board == 1 ? this.player1Cells : this.player2Cells;
+        playerCells[x][y].classList.add("hit");
+    }
 }
 
 export class Cell {

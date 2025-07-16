@@ -3,9 +3,9 @@ import { Ship, GameBoard, Player } from "./game-objects.js";
 
 export class GameController {
     constructor() {
-        this.player1Board = new GameBoard();
-        this.player2Board = new GameBoard();
         this.uiController = new UIController(this);
+        this.player1Board = new GameBoard(1, this.uiController);
+        this.player2Board = new GameBoard(2, this.uiController);
         // this.player1Board = this.uiController.player1;
         // this.player2Board = this.uiController.player2;
         this.player = new Player("real");

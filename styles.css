@@ -5,6 +5,7 @@
     --miss: #3f3e4d;
     --hit: #d93654;
     --ship: #d9bb96;
+    --ship-hover: #cf9f63;
 }
 
 body {
@@ -59,7 +60,11 @@ body {
     background-color: var(--ship);
 }
 
-.cell.hit {
+.cell.ship:hover {
+    background-color: var(--ship-hover);
+}
+
+.cell.ship.hit {
     background-color: var(--hit);
 }
 

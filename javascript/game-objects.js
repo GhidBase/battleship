@@ -17,10 +17,12 @@ export class Ship {
 }
 
 export class GameBoard {
-    constructor() {
+    constructor(playerNum, uiController) {
+        this.uiController = uiController;
         this.coords = [];
         this.ships = [];
         this.attacksReceived = [];
+        this.playerNum = playerNum;
 
         for (let i = 0; i < 10; i++) {
             this.coords[i] = new Array(10);
@@ -127,6 +129,7 @@ export class GameBoard {
         this.attacksReceived.push(`${x},${y}`);
         if (target) {
             target.hit();
+            this.uiController.drawHit(this.playerNum, x, y);
             return "hit";
         } else {
             return "miss";

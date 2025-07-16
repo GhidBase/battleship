@@ -50,3 +50,8 @@ What are the steps to displaying the board?
     Pass in the ui controller as an arg
 
     Now is miss rendering
+
+    Next is switching turns
+    Where are turns stored?
+    gameController.turn
+    When do I switch turns?

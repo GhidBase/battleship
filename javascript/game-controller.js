@@ -46,15 +46,23 @@ export class GameController {
         if (this.turn != 1) {
             console.log("other players turn");
         } else if (this.turn == 1) {
-            console.log(`player 1: ${this.player2Board.receiveAttack(x, y)}`);
+            let attackResult = this.player2Board.receiveAttack(x, y);
+            console.log(`player 1: ${attackResult}`);
+            if (attackResult != "stale move") {
+                this.turn = 2;
+            }
         }
     }
 
-    player2Action() {
+    player2Action(x, y) {
         if (this.turn != 2) {
             console.log("other players turn");
         } else {
-            console.log(`player 2: ${this.player1Board.receiveAttack(x, y)}`);
+            let attackResult = this.player1Board.receiveAttack(x, y);
+            console.log(`player 2: ${attackResult}`);
+            if (attackResult != "stale move") {
+                this.turn = 1;
+            }
         }
     }
 }

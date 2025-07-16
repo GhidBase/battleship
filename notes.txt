@@ -55,3 +55,6 @@ What are the steps to displaying the board?
     Where are turns stored?
     gameController.turn
     When do I switch turns?
+
+    I need to find a different way to control whether something is an
+    attack or a miss

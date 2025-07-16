@@ -68,13 +68,13 @@ export class UIController {
         }
     }
 
-    drawAttack(board, x, y) {
+    drawHit(board, x, y) {
         let playerCells = board == 1 ? this.player1Cells : this.player2Cells;
-        if (playerCells[x][y].classList.contains("ship")) {
-            playerCells[x][y].classList.add("hit");
-        } else {
-            playerCells[x][y].classList.add("miss");
-        }
+        playerCells[x][y].classList.add("hit");
+    }
+    drawMiss(board, x, y) {
+        let playerCells = board == 1 ? this.player1Cells : this.player2Cells;
+        playerCells[x][y].classList.add("miss");
     }
 }
 

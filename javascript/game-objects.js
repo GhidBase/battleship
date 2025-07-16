@@ -128,11 +128,12 @@ export class GameBoard {
 
         this.attacksReceived.push(`${x},${y}`);
 
-        this.uiController.drawAttack(this.playerNum, x, y);
         if (target) {
             target.hit();
+            this.uiController.drawHit(this.playerNum, x, y);
             return "hit";
         } else {
+            this.uiController.drawMiss(this.playerNum, x, y);
             return "miss";
         }
     }

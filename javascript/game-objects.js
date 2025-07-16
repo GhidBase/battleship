@@ -127,9 +127,10 @@ export class GameBoard {
         // are ships.
 
         this.attacksReceived.push(`${x},${y}`);
+
+        this.uiController.drawAttack(this.playerNum, x, y);
         if (target) {
             target.hit();
-            this.uiController.drawHit(this.playerNum, x, y);
             return "hit";
         } else {
             return "miss";

@@ -68,9 +68,15 @@ export class UIController {
         }
     }
 
-    drawHit(board, x, y) {
+    drawAttack(board, x, y) {
         let playerCells = board == 1 ? this.player1Cells : this.player2Cells;
-        playerCells[x][y].classList.add("hit");
+        if (playerCells[x][y].classList.contains("ship")) {
+            console.log("HIT DRAW");
+            playerCells[x][y].classList.add("hit");
+        } else {
+            console.log("MISS DRAW");
+            playerCells[x][y].classList.add("miss");
+        }
     }
 }
 

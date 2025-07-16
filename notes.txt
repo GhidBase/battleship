@@ -48,3 +48,5 @@ What are the steps to displaying the board?
     What creates the GameBoard?
     game-controlker.js
     Pass in the ui controller as an arg
+
+    Now is miss rendering

@@ -58,3 +58,7 @@ What are the steps to displaying the board?
 
     I need to find a different way to control whether something is an
     attack or a miss
+
+    how to end the game
+    after making any move, check to see how if all that
+    players ships have been sunk

@@ -11,6 +11,7 @@ export class GameController {
         this.player = new Player("real");
         this.player2 = new Player("computer");
         this.turn = 1;
+        this.gameOver = false;
 
         /* 
             Place the ships
@@ -43,11 +44,18 @@ export class GameController {
     }
 
     player1Action(x, y) {
+        if (this.gameOver) {
+            return;
+        }
         if (this.turn != 1) {
             console.log("other players turn");
         } else if (this.turn == 1) {
             let attackResult = this.player2Board.receiveAttack(x, y);
-            console.log(`player 1: ${attackResult}`);
+            if (this.player2Board.allShipsSunk()) {
+                this.gameOver = true;
+                console.log("Game Over, Player 1 wins");
+            }
+
             if (attackResult != "stale move") {
                 this.turn = 2;
             }
@@ -55,11 +63,18 @@ export class GameController {
     }
 
     player2Action(x, y) {
+        if (this.gameOver) {
+            return;
+        }
         if (this.turn != 2) {
             console.log("other players turn");
         } else {
             let attackResult = this.player1Board.receiveAttack(x, y);
-            console.log(`player 2: ${attackResult}`);
+            if (this.player1Board.allShipsSunk()) {
+                this.gameOver = true;
+                console.log("Game Over, Player 2 wins");
+            }
+
             if (attackResult != "stale move") {
                 this.turn = 1;
             }

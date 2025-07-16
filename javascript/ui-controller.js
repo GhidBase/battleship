@@ -71,6 +71,7 @@ export class UIController {
     drawHit(board, x, y) {
         let playerCells = board == 1 ? this.player1Cells : this.player2Cells;
         playerCells[x][y].classList.add("hit");
+        playerCells[x][y].classList.add("ship");
     }
     drawMiss(board, x, y) {
         let playerCells = board == 1 ? this.player1Cells : this.player2Cells;

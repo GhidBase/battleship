@@ -122,6 +122,9 @@ export class UIController {
             case "p1 win":
                 message1 = "Player 1 wins!";
                 break;
+            case "p2 win":
+                message1 = "Player 2 wins!";
+                break;
             case "sunk":
                 message1 = "Ship sunk!"
         }

@@ -8,9 +8,10 @@ export class GameController {
         this.player2Board = new GameBoard(2, this.uiController);
         // this.player1Board = this.uiController.player1;
         // this.player2Board = this.uiController.player2;
-        this.player = new Player("real", this.player1Board);
+        this.player = new Player("computer", this.player1Board);
         this.player2 = new Player("computer", this.player2Board);
-        this.turn = 1;
+        this.turn;
+        this.changeTurn();
         this.gameOver = false;
 
         /* 
@@ -70,6 +71,11 @@ export class GameController {
 
         if (attackResult != "stale move" && attackResult != "wrong turn") {
             this.changeTurn();
+        } else {
+            let player = this.turn == 1 ? this.player : this.player2;
+            if (player.type == "computer") {
+                this.aiMove();
+            }
         }
     }
 
@@ -85,6 +91,10 @@ export class GameController {
             attackResult = this.player1Board.receiveAttack(x, y);
         }
 
+        if (this.player1Board.allShipsSunk()) {
+            attackResult = "p2 win";
+        }
+
         this.uiController.drawMessageUsingAttackResultAndTurn(
             attackResult,
             this.turn
@@ -96,11 +106,20 @@ export class GameController {
 
         if (attackResult != "stale move" && attackResult != "wrong turn") {
             this.changeTurn();
+        } else {
+            let player = this.turn == 1 ? this.player : this.player2;
+            if (player.type == "computer") {
+                this.aiMove();
+            }
         }
     }
 
     changeTurn() {
-        this.turn = this.turn == 1 ? 2 : 1;
+        if (this.turn) {
+            this.turn = this.turn == 1 ? 2 : 1;
+        } else {
+            this.turn = 1;
+        }
         let player = this.turn == 1 ? this.player : this.player2;
         if (player.type == "computer") {
             this.aiMove();
@@ -109,10 +128,10 @@ export class GameController {
 
     aiMove() {
         let player = this.turn == 1 ? this.player : this.player2;
-        let board = this.turn == 1 ? this.player1Board : this.player2Board;
+        let board = this.turn == 2 ? this.player1Board : this.player2Board;
         let max = board.possibleMoves.length;
-        let nextMove = Math.floor(Math.random() * (max + 1));
-
+        let nextMove = Math.floor(Math.random() * (max));
+        
         let x = board.possibleMoves[nextMove][0];
         let y = board.possibleMoves[nextMove][2];
         setTimeout(() => {
@@ -121,6 +140,6 @@ export class GameController {
             } else {
                 this.player2Action(x, y);
             }
-        }, 3000);
+        }, 0);
     }
 }

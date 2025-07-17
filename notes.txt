@@ -62,3 +62,13 @@ What are the steps to displaying the board?
     how to end the game
     after making any move, check to see how if all that
     players ships have been sunk
+
+    Display in message panel the result of each turn
+    Use a timeout to switch from the result of the move to
+    a notification of the turn switch
+
+    Set the message 1 and message 2 values as fields in ui-controller
+    so we can check if they've changed before we actually draw them, in
+    cases where the user clicks around quickly
+
+    

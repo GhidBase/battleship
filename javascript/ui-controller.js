@@ -3,18 +3,18 @@
 export class UIController {
     constructor(gameController) {
         this.gameController = gameController;
+        this.currentMessage2;
+
         this.player1 = document.getElementById("player-1");
         this.player1Cells = [];
-        console.log(this.player1Cells);
         this.player2 = document.getElementById("player-2");
         this.player2Cells = [];
-        for (let i = 0; i < 10; i++) {
-            this.player2Cells.push([]);
-        }
-        this.player2Cells = [];
+
+        // Clear cells
         this.player1.innerHTML = "";
         this.player2.innerHTML = "";
 
+        // Populate the boards with cells
         for (let i = 0; i < 10; i++) {
             this.player1Cells.push([]);
             for (let j = 0; j < 10; j++) {
@@ -28,6 +28,10 @@ export class UIController {
                 this.player2Cells[i].push(this.createCell(this.player2, i, j));
             }
         }
+
+        this.messagePanel = document
+            .getElementById("message-panel")
+            .querySelector("p");
     }
 
     createCell(board, x, y) {
@@ -76,6 +80,54 @@ export class UIController {
     drawMiss(board, x, y) {
         let playerCells = board == 1 ? this.player1Cells : this.player2Cells;
         playerCells[x][y].classList.add("miss");
+    }
+
+    drawMessage(message) {
+        this.messagePanel.textContent = message;
+    }
+
+    draw2Messages(message1, message2) {
+        this.currentMessage2 = message2;
+
+        this.messagePanel.textContent = message1;
+        setTimeout(() => {
+            /*
+                I check if the currentMessage2 is still the 
+                same as it was when this was queued up. If the
+                currentMessage2 is different by the time the timer
+                is up, that means another message is already loaded,
+                and we should wait for that one instead
+            */
+            if (this.currentMessage2 == message2) {
+                this.drawMessage(message2);
+            }
+        }, 1000);
+    }
+
+    drawMessageUsingAttackResultAndTurn(result, turn) {
+        let message1;
+        switch (result) {
+            case "hit":
+                message1 = "Hit!";
+                break;
+            case "miss":
+                message1 = "Miss";
+                break;
+            case "wrong turn":
+                message1 = "Other player's turn";
+                break;
+            case "stale move":
+                message1 = "Invalid move";
+                break;
+            case "p1 win":
+                message1 = "Player 1 wins!";
+                break;
+        }
+        let message2 = turn == 1 ? "Player 2's turn" : "Player 1's turn";
+        if (message1 == "Player 1 wins!" || message1 == "Player 2 wins!") {
+            message2 = message1;
+        }
+        this.draw2Messages(message1, message2);
     }
 }
 

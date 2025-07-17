@@ -47,18 +47,29 @@ export class GameController {
         if (this.gameOver) {
             return;
         }
-        if (this.turn != 1) {
-            console.log("other players turn");
-        } else if (this.turn == 1) {
-            let attackResult = this.player2Board.receiveAttack(x, y);
-            if (this.player2Board.allShipsSunk()) {
-                this.gameOver = true;
-                console.log("Game Over, Player 1 wins");
-            }
 
-            if (attackResult != "stale move") {
-                this.turn = 2;
-            }
+        let attackResult;
+        if (this.turn != 1) {
+            attackResult = "wrong turn";
+        } else {
+            attackResult = this.player2Board.receiveAttack(x, y);
+        }
+
+        if (this.player2Board.allShipsSunk()) {
+            attackResult = "p1 win";
+        }
+
+        this.uiController.drawMessageUsingAttackResultAndTurn(
+            attackResult,
+            this.turn
+        );
+
+        if (this.player2Board.allShipsSunk()) {
+            this.gameOver = true;
+        }
+
+        if (attackResult != "stale move") {
+            this.turn = 2;
         }
     }
 
@@ -66,18 +77,25 @@ export class GameController {
         if (this.gameOver) {
             return;
         }
-        if (this.turn != 2) {
-            console.log("other players turn");
-        } else {
-            let attackResult = this.player1Board.receiveAttack(x, y);
-            if (this.player1Board.allShipsSunk()) {
-                this.gameOver = true;
-                console.log("Game Over, Player 2 wins");
-            }
 
-            if (attackResult != "stale move") {
-                this.turn = 1;
-            }
+        let attackResult;
+        if (this.turn != 2) {
+            attackResult = "wrong turn";
+        } else {
+            attackResult = this.player1Board.receiveAttack(x, y);
+        }
+
+        this.uiController.drawMessageUsingAttackResultAndTurn(
+            attackResult,
+            this.turn
+        );
+
+        if (this.player1Board.allShipsSunk()) {
+            this.gameOver = true;
+        }
+
+        if (attackResult != "stale move") {
+            this.turn = 1;
         }
     }
 }

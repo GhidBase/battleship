@@ -85,4 +85,6 @@ What are the steps to displaying the board?
              turn switches?
              - Where does the turn switch
              - where is the list of available moves
-     - After that, it needs to be considered how what to do next after a hit
+             
+
+    - block manual board moves if it's ai's turn

@@ -22,10 +22,17 @@ export class GameBoard {
         this.coords = [];
         this.ships = [];
         this.attacksReceived = [];
+        this.possibleMoves = [];
         this.playerNum = playerNum;
 
         for (let i = 0; i < 10; i++) {
             this.coords[i] = new Array(10);
+        }
+
+        for (let i = 0; i < 10; i++) {
+            for (let j = 0; j < 10; j++) {
+                this.possibleMoves.push(`${i},${j}`);
+            }
         }
     }
 
@@ -127,6 +134,9 @@ export class GameBoard {
         // are ships.
 
         this.attacksReceived.push(`${x},${y}`);
+        this.possibleMoves = this.possibleMoves.filter(
+            (element) => element != `${x},${y}`
+        );
 
         if (target) {
             target.hit();
@@ -149,8 +159,8 @@ export class GameBoard {
 }
 
 export class Player {
-    constructor(type) {
-        this.board = new GameBoard();
+    constructor(type, board) {
+        this.board = board;
         this.type = type; // real or computer
         if (type != "real" && type != "computer") {
             throw new Error(

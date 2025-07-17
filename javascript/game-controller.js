@@ -8,8 +8,8 @@ export class GameController {
         this.player2Board = new GameBoard(2, this.uiController);
         // this.player1Board = this.uiController.player1;
         // this.player2Board = this.uiController.player2;
-        this.player = new Player("real");
-        this.player2 = new Player("computer");
+        this.player = new Player("real", this.player1Board);
+        this.player2 = new Player("computer", this.player2Board);
         this.turn = 1;
         this.gameOver = false;
 
@@ -69,7 +69,7 @@ export class GameController {
         }
 
         if (attackResult != "stale move" && attackResult != "wrong turn") {
-            this.turn = 2;
+            this.changeTurn();
         }
     }
 
@@ -95,7 +95,32 @@ export class GameController {
         }
 
         if (attackResult != "stale move" && attackResult != "wrong turn") {
-            this.turn = 1;
+            this.changeTurn();
         }
+    }
+
+    changeTurn() {
+        this.turn = this.turn == 1 ? 2 : 1;
+        let player = this.turn == 1 ? this.player : this.player2;
+        if (player.type == "computer") {
+            this.aiMove();
+        }
+    }
+
+    aiMove() {
+        let player = this.turn == 1 ? this.player : this.player2;
+        let board = this.turn == 1 ? this.player1Board : this.player2Board;
+        let max = board.possibleMoves.length;
+        let nextMove = Math.floor(Math.random() * (max + 1));
+
+        let x = board.possibleMoves[nextMove][0];
+        let y = board.possibleMoves[nextMove][2];
+        setTimeout(() => {
+            if (player == this.player) {
+                this.player1Action(x, y);
+            } else {
+                this.player2Action(x, y);
+            }
+        }, 3000);
     }
 }

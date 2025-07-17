@@ -77,4 +77,12 @@ What are the steps to displaying the board?
     Where to start? Write a script that generates a move for the current player.
      - The move must only look at places in the other player's coords
      array that are empty
+         - I have a list of available moves now. I need to figure out when to
+        start the ai turn.
+             - I store the type "player" or "computer" on the player object
+             - I store it as player.type
+             - When a turn switches can I make an ai move? How do I track when a
+             turn switches?
+             - Where does the turn switch
+             - where is the list of available moves
      - After that, it needs to be considered how what to do next after a hit

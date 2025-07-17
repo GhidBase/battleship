@@ -68,7 +68,7 @@ export class GameController {
             this.gameOver = true;
         }
 
-        if (attackResult != "stale move") {
+        if (attackResult != "stale move" && attackResult != "wrong turn") {
             this.turn = 2;
         }
     }
@@ -94,7 +94,7 @@ export class GameController {
             this.gameOver = true;
         }
 
-        if (attackResult != "stale move") {
+        if (attackResult != "stale move" && attackResult != "wrong turn") {
             this.turn = 1;
         }
     }

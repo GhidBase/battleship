@@ -124,6 +124,9 @@ export class UIController {
                 break;
         }
         let message2 = turn == 1 ? "Player 2's turn" : "Player 1's turn";
+        if (result == "wrong turn") {
+            message2 = turn == 2 ? "Player 2's turn" : "Player 1's turn";
+        }
         if (message1 == "Player 1 wins!" || message1 == "Player 2 wins!") {
             message2 = message1;
         }

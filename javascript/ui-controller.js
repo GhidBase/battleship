@@ -122,6 +122,8 @@ export class UIController {
             case "p1 win":
                 message1 = "Player 1 wins!";
                 break;
+            case "sunk":
+                message1 = "Ship sunk!"
         }
         let message2 = turn == 1 ? "Player 2's turn" : "Player 1's turn";
         if (result == "wrong turn") {

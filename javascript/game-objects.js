@@ -131,6 +131,9 @@ export class GameBoard {
         if (target) {
             target.hit();
             this.uiController.drawHit(this.playerNum, x, y);
+            if (target.isSunk()) {
+                return "sunk";
+            }
             return "hit";
         } else {
             this.uiController.drawMiss(this.playerNum, x, y);

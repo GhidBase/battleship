@@ -88,7 +88,7 @@ What are the steps to displaying the board?
              
 
     ========= What's left? ===========
-     - random ship placement
+     - DONE - random ship placement
      - restart game button
      - ai that targets a boat after finding one
      - block manual board moves if it's ai's turn

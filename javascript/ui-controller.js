@@ -151,6 +151,10 @@ export class UIController {
         }
         this.draw2Messages(message1, message2);
     }
+
+    drawStartGameMessage() {
+        this.drawMessage("game start");
+    }
 }
 
 export class Cell {

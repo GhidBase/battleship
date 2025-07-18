@@ -13,16 +13,8 @@ export class GameController {
         this.turn;
         this.changeTurn();
         this.gameOver = false;
+        this.uiController.drawStartGameMessage();
 
-        /* 
-            Place the ships
-        */
-        // this.placeShip(1, 0, 0, 3, "vertical");
-        // this.placeShip(1, 4, 7, 3, "vertical");
-        // this.placeShip(1, 8, 3, 2, "horizontal");
-        // this.placeShip(1, 0, 4, 5);
-        // this.placeShip(1, 4, 0, 4);
-        // this.placeShip(1, 4, 0, 4);
         this.randomizeShip(2, 5);
         this.randomizeShip(2, 4);
         this.randomizeShip(2, 3);

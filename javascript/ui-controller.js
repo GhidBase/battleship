@@ -37,6 +37,20 @@ export class UIController {
     createCell(board, x, y) {
         let cell = document.createElement("div");
         cell.classList.add("cell");
+        // ======= Assign Corner Graphics ============
+        if (x == 0 && y == 9) {
+            cell.classList.add("bottom-left");
+        }
+        if (x == 9 && y == 9) {
+            cell.classList.add("bottom-right");
+        }
+        if (x == 0 && y == 0) {
+            cell.classList.add("top-left");
+        }
+        if (x == 9 && y == 0) {
+            cell.classList.add("top-right");
+        }
+
         board.append(cell);
         cell.addEventListener("click", () => {
             if (board == this.player1) {
@@ -126,7 +140,7 @@ export class UIController {
                 message1 = "Player 2 wins!";
                 break;
             case "sunk":
-                message1 = "Ship sunk!"
+                message1 = "Ship sunk!";
         }
         let message2 = turn == 1 ? "Player 2's turn" : "Player 1's turn";
         if (result == "wrong turn") {

@@ -1,5 +1,7 @@
 :root {
     --background: #272640;
+    --background2: #1f1d44;
+    --background3: #1d1d2c;
     --panel: #383659;
     --game-board: #4f4d6e;
     --miss: #3f3e4d;
@@ -9,7 +11,11 @@
 }
 
 body {
-    background-color: var(--background);
+    background-image: linear-gradient(
+        to bottom right,
+        var(--background2),
+        var(--background3)
+    );
     width: 100dvw;
     height: 100dvh;
     margin: 0;
@@ -43,11 +49,25 @@ body {
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(10, 1fr);
 
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.45);
+    box-shadow: 0px 0px 10px #5a6dff23;
 }
 
 .cell {
     border: black solid 1px;
+}
+
+.top-left {
+    border-radius: 12px 0 0 0;
+}
+
+.top-right {
+    border-radius: 0 12px 0 0;
+}
+.bottom-left {
+    border-radius: 0 0 0 12px;
+}
+.bottom-right {
+    border-radius: 0 0 12px 0;
 }
 
 .cell:hover {
@@ -79,20 +99,10 @@ body {
 
     border: 1px solid black;
     border-radius: 0.25em;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.45);
+    box-shadow: 0px 0px 10px #5a6dff2f;
 }
 
 #message-panel p {
     margin: 20px;
     font-size: 40px;
-}
-
-.game-over {
-    position: absolute;
-    font-size: 100px;
-    background-color: var(--panel);
-    border: 1px solid black;
-    border-radius: 0.25em;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 1);
-    padding: 20px;
 }

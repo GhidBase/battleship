@@ -6,9 +6,9 @@ export class GameController {
         this.uiController = new UIController(this);
         this.player1Board = new GameBoard(1, this.uiController);
         this.player2Board = new GameBoard(2, this.uiController);
-        // this.player1Board = this.uiController.player1;
-        // this.player2Board = this.uiController.player2;
-        this.player = new Player("computer", this.player1Board);
+
+        // types are real and computer
+        this.player = new Player("real", this.player1Board);
         this.player2 = new Player("computer", this.player2Board);
         this.turn;
         this.changeTurn();
@@ -17,17 +17,23 @@ export class GameController {
         /* 
             Place the ships
         */
-        this.placeShip(1, 0, 0, 3, "vertical");
-        this.placeShip(1, 4, 7, 3, "vertical");
-        this.placeShip(1, 8, 3, 2, "horizontal");
-        this.placeShip(1, 0, 4, 5);
-        this.placeShip(1, 4, 0, 4);
-        this.placeShip(1, 4, 0, 4);
-        this.placeShip(2, 5, 5, 5, "vertical");
-        this.placeShip(2, 1, 1, 4);
-        this.placeShip(2, 3, 3, 3);
-        this.placeShip(2, 9, 7, 3, "vertical");
-        this.placeShip(2, 0, 9, 2);
+        // this.placeShip(1, 0, 0, 3, "vertical");
+        // this.placeShip(1, 4, 7, 3, "vertical");
+        // this.placeShip(1, 8, 3, 2, "horizontal");
+        // this.placeShip(1, 0, 4, 5);
+        // this.placeShip(1, 4, 0, 4);
+        // this.placeShip(1, 4, 0, 4);
+        this.randomizeShip(2, 5);
+        this.randomizeShip(2, 4);
+        this.randomizeShip(2, 3);
+        this.randomizeShip(2, 3);
+        this.randomizeShip(2, 2);
+
+        this.randomizeShip(1, 5);
+        this.randomizeShip(1, 4);
+        this.randomizeShip(1, 3);
+        this.randomizeShip(1, 3);
+        this.randomizeShip(1, 2);
     }
 
     placeShip(player, x, y, length, direction) {
@@ -41,7 +47,31 @@ export class GameController {
         let placeShip = board.placeShip(x, y, length, direction);
         if (placeShip) {
             this.uiController.drawShip(player, x, y, length, direction);
+            return true;
         }
+    }
+
+    randomizeShip(board, length) {
+        let settings = this.randomSettings();
+        let result;
+        while (!result) {
+            settings = this.randomSettings();
+            result = this.placeShip(
+                board,
+                settings.x,
+                settings.y,
+                length,
+                settings.orientation
+            );
+        }
+    }
+
+    randomSettings() {
+        let x = Math.floor(Math.random() * 10);
+        let y = Math.floor(Math.random() * 10);
+        let orientation = Math.floor(Math.random() * 2 + 1);
+        orientation = orientation == 1 ? "horizontal" : "vertical";
+        return { x, y, orientation };
     }
 
     player1Action(x, y) {
@@ -130,8 +160,8 @@ export class GameController {
         let player = this.turn == 1 ? this.player : this.player2;
         let board = this.turn == 2 ? this.player1Board : this.player2Board;
         let max = board.possibleMoves.length;
-        let nextMove = Math.floor(Math.random() * (max));
-        
+        let nextMove = Math.floor(Math.random() * max);
+
         let x = board.possibleMoves[nextMove][0];
         let y = board.possibleMoves[nextMove][2];
         setTimeout(() => {
@@ -140,6 +170,6 @@ export class GameController {
             } else {
                 this.player2Action(x, y);
             }
-        }, 0);
+        }, 2750);
     }
 }

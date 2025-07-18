@@ -87,4 +87,12 @@ What are the steps to displaying the board?
              - where is the list of available moves
              
 
-    - block manual board moves if it's ai's turn
+    ========= What's left? ===========
+     - random ship placement
+     - restart game button
+     - ai that targets a boat after finding one
+     - block manual board moves if it's ai's turn
+
+
+    ========= Random Ship Placement ========
+     - What file should I place the randomship function into 

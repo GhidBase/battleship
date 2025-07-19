@@ -89,10 +89,11 @@ What are the steps to displaying the board?
 
     ========= What's left? ===========
      - DONE - random ship placement
-     - restart game button on message panel
-     - randomize placements option on turn 1
+     - DONE - restart game button on message panel
+     - DONE - randomize placements option on turn 1
      - ai that targets a boat after finding one
-     - block manual board moves if it's ai's turn
+     - DONE - block manual board moves if it's ai's turn
+     - hide enemy boats
 
 
     ========= Random Ship Placement ========

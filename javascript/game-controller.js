@@ -3,6 +3,11 @@ import { Ship, GameBoard, Player } from "./game-objects.js";
 
 export class GameController {
     constructor() {
+        this.newGame();
+    }
+
+    newGame() {
+        console.clear();
         this.uiController = new UIController(this);
         this.player1Board = new GameBoard(1, this.uiController);
         this.player2Board = new GameBoard(2, this.uiController);
@@ -10,11 +15,16 @@ export class GameController {
         // types are real and computer
         this.player = new Player("real", this.player1Board);
         this.player2 = new Player("computer", this.player2Board);
-        this.turn;
+        this.turn = null;
         this.changeTurn();
         this.gameOver = false;
         this.uiController.drawStartGameMessage();
 
+        this.randomizeShips();
+        console.log(this.turn);
+    }
+
+    randomizeShips() {
         this.randomizeShip(2, 5);
         this.randomizeShip(2, 4);
         this.randomizeShip(2, 3);
@@ -66,8 +76,17 @@ export class GameController {
         return { x, y, orientation };
     }
 
-    player1Action(x, y) {
+    player1Action(x, y, isAI) {
         if (this.gameOver) {
+            return;
+        }
+
+        if (this.turn != 1) {
+            return;
+        }
+
+        if (!isAI && this.player.type == "computer") {
+            console.log(!isAI && this.player1.type == "computer");
             return;
         }
 
@@ -101,8 +120,16 @@ export class GameController {
         }
     }
 
-    player2Action(x, y) {
+    player2Action(x, y, isAI) {
         if (this.gameOver) {
+            return;
+        }
+
+        if (this.turn != 2) {
+            return;
+        }
+
+        if (!isAI && this.player2.type == "computer") {
             return;
         }
 
@@ -158,10 +185,10 @@ export class GameController {
         let y = board.possibleMoves[nextMove][2];
         setTimeout(() => {
             if (player == this.player) {
-                this.player1Action(x, y);
+                this.player1Action(x, y, true);
             } else {
-                this.player2Action(x, y);
+                this.player2Action(x, y, true);
             }
-        }, 2750);
+        }, 1500); // normally is 2750
     }
 }

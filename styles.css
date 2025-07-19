@@ -98,11 +98,28 @@ body {
     text-align: center;
 
     border: 1px solid black;
-    border-radius: 0.25em;
+    border-radius: 0.5em;
     box-shadow: 0px 0px 10px #5a6dff2f;
+    padding: 20px;
+
 }
 
 #message-panel p {
-    margin: 20px;
+    margin: 0px;
     font-size: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
+
+#message-panel p p {
+    font-size: 20px;
+}
+
+#message-panel p button {
+    background-color: var(--miss);
+    font-size: 20px;
+    color: grey;
+    padding: 8px 0;
+}
+

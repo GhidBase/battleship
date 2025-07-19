@@ -1,5 +1,3 @@
-// import { GameController } from "./game-controller.js";
-
 export class UIController {
     constructor(gameController) {
         this.gameController = gameController;
@@ -104,6 +102,7 @@ export class UIController {
         this.currentMessage2 = message2;
 
         this.messagePanel.textContent = message1;
+        this.addRestartButtonToPanel();
         setTimeout(() => {
             /*
                 I check if the currentMessage2 is still the 
@@ -114,6 +113,7 @@ export class UIController {
             */
             if (this.currentMessage2 == message2) {
                 this.drawMessage(message2);
+                this.addRestartButtonToPanel();
             }
         }, 1000);
     }
@@ -153,7 +153,29 @@ export class UIController {
     }
 
     drawStartGameMessage() {
-        this.drawMessage("game start");
+        this.messagePanel.textContent = "Game Start";
+        let line2 = document.createElement("p");
+        line2.textContent = "Setup your board then make a move";
+        this.messagePanel.append(line2);
+
+        let randomizeButton = document.createElement("button");
+        randomizeButton.textContent = "randomize";
+        this.messagePanel.append(randomizeButton);
+        randomizeButton.addEventListener("click", () => {
+            this.gameController.newGame();
+        });
+    }
+
+    addRestartButtonToPanel() {
+        if (this.currentMessage2 != "Player 1 wins!" && this.currentMessage2 != "Player 2 wins!") {
+            return;
+        }
+        let restartButton = document.createElement("button");
+        restartButton.textContent = "restart";
+        this.messagePanel.append(restartButton);
+        restartButton.addEventListener("click", () => {
+            this.gameController.newGame();
+        });
     }
 }
 

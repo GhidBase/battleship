@@ -13,7 +13,7 @@ export class GameController {
         this.player2Board = new GameBoard(2, this.uiController);
 
         // types are real and computer
-        this.player = new Player("real", this.player1Board);
+        this.player = new Player("computer", this.player1Board);
         this.player2 = new Player("computer", this.player2Board);
         this.turn = null;
         this.changeTurn();
@@ -177,18 +177,66 @@ export class GameController {
 
     aiMove() {
         let player = this.turn == 1 ? this.player : this.player2;
-        let board = this.turn == 2 ? this.player1Board : this.player2Board;
-        let max = board.possibleMoves.length;
-        let nextMove = Math.floor(Math.random() * max);
 
-        let x = board.possibleMoves[nextMove][0];
-        let y = board.possibleMoves[nextMove][2];
-        setTimeout(() => {
-            if (player == this.player) {
-                this.player1Action(x, y, true);
-            } else {
-                this.player2Action(x, y, true);
-            }
-        }, 1500); // normally is 2750
+        if (player.searching.length > 0) {
+            // use a saved coord
+            let board = this.turn == 2 ? this.player1Board : this.player2Board;
+            let max = player.searching.length;
+            let nextMove = Math.floor(Math.random() * max);
+
+            let x = player.searching[nextMove].x;
+            let y = player.searching[nextMove].y;
+            player.searching.splice(nextMove, 1);
+            setTimeout(() => {
+                if (player == this.player) {
+                    this.player1Action(x, y, true);
+                } else {
+                    this.player2Action(x, y, true);
+                }
+            }, 1500); // normally is 2750
+        } else {
+            // use a random coord
+            // if the random coord land store the adjacent panels
+            // that aren't yet in possible moves
+            let board = this.turn == 2 ? this.player1Board : this.player2Board;
+            let max = board.possibleMoves.length;
+            let nextMove = Math.floor(Math.random() * max);
+
+            // 0 and 2 because we call a string that looks like 0,0
+            let x = board.possibleMoves[nextMove][0];
+            let y = board.possibleMoves[nextMove][2];
+
+            // check to see if the adjacent panels are possible
+            // moves
+            let xplus = x;
+            xplus++;
+            xplus = xplus + "," + y;
+            let xminus = x;
+            xminus--;
+            xminus = xminus + "." + y;
+
+            let yminus = y;
+            yminus--;
+            yminus = x + "." + yminus;
+
+            let yplus = y;
+            yplus++;
+            yplus = x + "." + yplus;
+
+            console.log("adj");
+            console.log(xplus);
+            console.log(xminus);
+            console.log(yplus);
+            console.log(yminus)
+            // if()
+
+            setTimeout(() => {
+                if (player == this.player) {
+                    this.player1Action(x, y, true);
+                } else {
+                    this.player2Action(x, y, true);
+                }
+            }, 1); // normally is 2750
+        }
     }
 }

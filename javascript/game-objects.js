@@ -162,6 +162,7 @@ export class Player {
     constructor(type, board) {
         this.board = board;
         this.type = type; // real or computer
+        this.searching = [];
         if (type != "real" && type != "computer") {
             throw new Error(
                 'player objects must be of type "real" or "computer"'

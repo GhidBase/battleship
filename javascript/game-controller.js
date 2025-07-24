@@ -21,7 +21,6 @@ export class GameController {
         this.uiController.drawStartGameMessage();
 
         this.randomizeShips();
-        console.log(this.turn);
     }
 
     randomizeShips() {
@@ -86,7 +85,7 @@ export class GameController {
         }
 
         if (!isAI && this.player.type == "computer") {
-            console.log(!isAI && this.player1.type == "computer");
+            console.log(!isAI && this.player.type == "computer");
             return;
         }
 
@@ -111,6 +110,7 @@ export class GameController {
         }
 
         if (attackResult != "stale move" && attackResult != "wrong turn") {
+            console.log("good move");
             this.changeTurn();
         } else {
             let player = this.turn == 1 ? this.player : this.player2;
@@ -118,6 +118,8 @@ export class GameController {
                 this.aiMove();
             }
         }
+
+        // console.log(attackResult);
     }
 
     player2Action(x, y, isAI) {
@@ -154,6 +156,7 @@ export class GameController {
         }
 
         if (attackResult != "stale move" && attackResult != "wrong turn") {
+            console.log("good move");
             this.changeTurn();
         } else {
             let player = this.turn == 1 ? this.player : this.player2;
@@ -161,6 +164,8 @@ export class GameController {
                 this.aiMove();
             }
         }
+
+        // console.log(attackResult);
     }
 
     changeTurn() {
@@ -175,6 +180,22 @@ export class GameController {
         }
     }
 
+    isValidCoords(coords) {
+        let coordsSplit = coords.split(",");
+        let x = coordsSplit[0];
+        let y = coordsSplit[1];
+
+        if (x > 9 || x < 0) {
+            return false;
+        }
+
+        if (y > 9 || y < 0) {
+            return false;
+        }
+
+        return true;
+    }
+
     aiMove() {
         let player = this.turn == 1 ? this.player : this.player2;
 
@@ -184,9 +205,11 @@ export class GameController {
             let max = player.searching.length;
             let nextMove = Math.floor(Math.random() * max);
 
-            let x = player.searching[nextMove].x;
-            let y = player.searching[nextMove].y;
+            let coords = player.searching[nextMove].split(",");
+            let x = coords[0];
+            let y = coords[1];
             player.searching.splice(nextMove, 1);
+            console.log("hunting move")
             setTimeout(() => {
                 if (player == this.player) {
                     this.player1Action(x, y, true);
@@ -207,28 +230,27 @@ export class GameController {
             let y = board.possibleMoves[nextMove][2];
 
             // check to see if the adjacent panels are possible
-            // moves
-            let xplus = x;
-            xplus++;
-            xplus = xplus + "," + y;
-            let xminus = x;
-            xminus--;
-            xminus = xminus + "." + y;
+            let xplus = Number(x) + 1 + "," + y;
+            let xminus = Number(x) - 1 + "," + y;
+            let yminus = x + "," + Number(y - 1);
+            let yplus = x + "," + (Number(y) + 1);
 
-            let yminus = y;
-            yminus--;
-            yminus = x + "." + yminus;
+            if (this.isValidCoords(xplus)) {
+                player.searching.push(xplus);
+            }
 
-            let yplus = y;
-            yplus++;
-            yplus = x + "." + yplus;
+            if (this.isValidCoords(xminus)) {
+                player.searching.push(xminus);
+            }
 
-            console.log("adj");
-            console.log(xplus);
-            console.log(xminus);
-            console.log(yplus);
-            console.log(yminus)
-            // if()
+            if (this.isValidCoords(yplus)) {
+                player.searching.push(yplus);
+            }
+
+            if (this.isValidCoords(yminus)) {
+                player.searching.push(yminus);
+            }
+
 
             setTimeout(() => {
                 if (player == this.player) {
@@ -236,7 +258,7 @@ export class GameController {
                 } else {
                     this.player2Action(x, y, true);
                 }
-            }, 1); // normally is 2750
+            }, 1500); // normally is 2750
         }
     }
 }

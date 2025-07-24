@@ -122,10 +122,11 @@ export class GameBoard {
     }
 
     receiveAttack(x, y) {
+        // console.log(this.attacksReceived);
         if (this.attacksReceived.includes(`${x},${y}`)) {
             return "stale move";
         }
-
+        
         let target = this.coords[x][y];
 
         // I only test for a truthy value because

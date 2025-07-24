@@ -94,8 +94,8 @@ What are the steps to displaying the board?
      - ai that targets a boat after finding one
          - Where should I add this functionality?
          - Add to aiMove()
-         - Only do random attacks if 'searching' is empty
-         - if a random hit lands, and there aren't any values in the searching
+         - DONE - Only do random attacks if 'searching' is empty
+         - CURRENT - if a random hit lands, and there aren't any values in the searching
          array, add the adjacent coords to the hit to the searching array
          - If 'searching' isn't empty, attempt to attack each direction until you hit. When you find a
          hit, set the next panel in that direction to searching. Remove the searching
@@ -106,3 +106,7 @@ What are the steps to displaying the board?
 
     ========= Random Ship Placement ========
      - What file should I place the randomship function into 
+
+
+     Currently it's not filtering out ships based on validity
+     One of the values always has double digits as well yplus

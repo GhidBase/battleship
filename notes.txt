@@ -115,4 +115,5 @@ What are the steps to displaying the board?
 
      If a hit connects on a searching hit, re-evaluate the searching array
 
-     
+     I added an enemy data property to the player object. It keeps a log about
+     all the located hits of enemies. Use that to re-evaluate searching values on hit and miss

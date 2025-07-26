@@ -255,18 +255,7 @@ export class GameController {
                 console.log("hit");
 
                 let locatedTarget = board.coords[x][y];
-                console.log("object");
-                console.log(locatedTarget);
                 player.enemyData.set(locatedTarget, { x: x, y: y });
-                console.log("enemy data");
-                console.log(player.enemyData);
-                console.log("enemy data entries");
-                console.log([...player.enemyData.entries()]); // see what's in the Map
-                console.log("enemy data has value");
-                console.log(player.enemyData.has(locatedTarget)); // check key existence
-                console.log("enemy data fetch");
-                console.log(player.enemyData.get(locatedTarget));
-                console.log("...");
 
                 // check to see if the adjacent panels are possible
                 let xplus = Number(x) + 1 + "," + y;

@@ -119,6 +119,8 @@ export class GameController {
             }
         }
 
+        return attackResult;
+
         // console.log(attackResult);
     }
 
@@ -165,6 +167,8 @@ export class GameController {
             }
         }
 
+        return attackResult;
+
         // console.log(attackResult);
     }
 
@@ -209,14 +213,20 @@ export class GameController {
             let x = coords[0];
             let y = coords[1];
             player.searching.splice(nextMove, 1);
-            console.log("hunting move")
+            // console.log("hunting move");
+            let result;
             setTimeout(() => {
                 if (player == this.player) {
-                    this.player1Action(x, y, true);
+                    result = this.player1Action(x, y, true);
                 } else {
-                    this.player2Action(x, y, true);
+                    result = this.player2Action(x, y, true);
                 }
-            }, 1500); // normally is 2750
+            }, 1000); // normally is 2750
+
+            if (result == "hit") {
+                // check existing player.searchings
+                // store a list of coords for each ship found
+            }
         } else {
             // use a random coord
             // if the random coord land store the adjacent panels
@@ -229,36 +239,57 @@ export class GameController {
             let x = board.possibleMoves[nextMove][0];
             let y = board.possibleMoves[nextMove][2];
 
-            // check to see if the adjacent panels are possible
-            let xplus = Number(x) + 1 + "," + y;
-            let xminus = Number(x) - 1 + "," + y;
-            let yminus = x + "," + Number(y - 1);
-            let yplus = x + "," + (Number(y) + 1);
-
-            if (this.isValidCoords(xplus)) {
-                player.searching.push(xplus);
-            }
-
-            if (this.isValidCoords(xminus)) {
-                player.searching.push(xminus);
-            }
-
-            if (this.isValidCoords(yplus)) {
-                player.searching.push(yplus);
-            }
-
-            if (this.isValidCoords(yminus)) {
-                player.searching.push(yminus);
-            }
-
-
             setTimeout(() => {
+                let result;
                 if (player == this.player) {
-                    this.player1Action(x, y, true);
+                    result = this.player1Action(x, y, true);
+                    console.log(result);
                 } else {
-                    this.player2Action(x, y, true);
+                    result = this.player2Action(x, y, true);
                 }
-            }, 1500); // normally is 2750
+
+                if (result != "hit") {
+                    return;
+                }
+
+                console.log("hit");
+
+                let locatedTarget = board.coords[x][y];
+                console.log("object");
+                console.log(locatedTarget);
+                player.enemyData.set(locatedTarget, { x: x, y: y });
+                console.log("enemy data");
+                console.log(player.enemyData);
+                console.log("enemy data entries");
+                console.log([...player.enemyData.entries()]); // see what's in the Map
+                console.log("enemy data has value");
+                console.log(player.enemyData.has(locatedTarget)); // check key existence
+                console.log("enemy data fetch");
+                console.log(player.enemyData.get(locatedTarget));
+                console.log("...");
+
+                // check to see if the adjacent panels are possible
+                let xplus = Number(x) + 1 + "," + y;
+                let xminus = Number(x) - 1 + "," + y;
+                let yminus = x + "," + Number(y - 1);
+                let yplus = x + "," + (Number(y) + 1);
+
+                if (this.isValidCoords(xplus)) {
+                    player.searching.push(xplus);
+                }
+
+                if (this.isValidCoords(xminus)) {
+                    player.searching.push(xminus);
+                }
+
+                if (this.isValidCoords(yplus)) {
+                    player.searching.push(yplus);
+                }
+
+                if (this.isValidCoords(yminus)) {
+                    player.searching.push(yminus);
+                }
+            }, 1000); // normally is 2750
         }
     }
 }

@@ -169,5 +169,6 @@ export class Player {
                 'player objects must be of type "real" or "computer"'
             );
         }
+        this.enemyData = new Map;
     }
 }

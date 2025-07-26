@@ -110,3 +110,9 @@ What are the steps to displaying the board?
 
      Currently it's not filtering out ships based on validity
      One of the values always has double digits as well yplus
+
+     I need to make it trigger on hit, so it isn't always looking in a star pattern
+
+     If a hit connects on a searching hit, re-evaluate the searching array
+
+     

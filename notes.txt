@@ -117,3 +117,26 @@ What are the steps to displaying the board?
 
      I added an enemy data property to the player object. It keeps a log about
      all the located hits of enemies. Use that to re-evaluate searching values on hit and miss
+
+
+
+
+     ========= CURRENT STEP ===============
+
+
+     When a turn comes up, if there is enemy data that isSunk() false, attack
+     a coordinate that's in between the ends, or is 1 farther than the ends, and
+     exists in the possibleMoves array
+
+     If the attack lands, store it in an array of landed hits in the enemyData.
+     If the enemyData doesn't contain an orientation value but has multiple
+     values in landed hits, check the multiple values to find the orientation.
+     Store the orientation as an array, 0 is orientation and 1 is coord of the
+     row/column
+
+     If we have the orientation, we need to also store an "ends" array
+     position 0 of that array will contain the smallest coord and position
+     1 will contain the largest coord of the ends. These ends will correspond
+     to whichever plane the ship is oriented along (horizontal = x coords)
+
+     

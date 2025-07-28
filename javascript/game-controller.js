@@ -110,7 +110,6 @@ export class GameController {
         }
 
         if (attackResult != "stale move" && attackResult != "wrong turn") {
-            console.log("good move");
             this.changeTurn();
         } else {
             let player = this.turn == 1 ? this.player : this.player2;
@@ -120,8 +119,6 @@ export class GameController {
         }
 
         return attackResult;
-
-        // console.log(attackResult);
     }
 
     player2Action(x, y, isAI) {
@@ -158,7 +155,6 @@ export class GameController {
         }
 
         if (attackResult != "stale move" && attackResult != "wrong turn") {
-            console.log("good move");
             this.changeTurn();
         } else {
             let player = this.turn == 1 ? this.player : this.player2;
@@ -168,8 +164,6 @@ export class GameController {
         }
 
         return attackResult;
-
-        // console.log(attackResult);
     }
 
     changeTurn() {
@@ -200,6 +194,36 @@ export class GameController {
         return true;
     }
 
+    handleAIHit(x, y, inputBoard, inputPlayer) {
+        let player = inputPlayer;
+        let board = inputBoard;
+        let locatedTarget = board.coords[x][y];
+        player.enemyData.set(locatedTarget, { x: x, y: y });
+        console.log(player.enemyData);
+
+        // check to see if the adjacent panels are possible
+        let xplus = Number(x) + 1 + "," + y;
+        let xminus = Number(x) - 1 + "," + y;
+        let yminus = x + "," + Number(y - 1);
+        let yplus = x + "," + (Number(y) + 1);
+
+        if (this.isValidCoords(xplus)) {
+            player.searching.push(xplus);
+        }
+
+        if (this.isValidCoords(xminus)) {
+            player.searching.push(xminus);
+        }
+
+        if (this.isValidCoords(yplus)) {
+            player.searching.push(yplus);
+        }
+
+        if (this.isValidCoords(yminus)) {
+            player.searching.push(yminus);
+        }
+    }
+
     aiMove() {
         let player = this.turn == 1 ? this.player : this.player2;
 
@@ -213,7 +237,6 @@ export class GameController {
             let x = coords[0];
             let y = coords[1];
             player.searching.splice(nextMove, 1);
-            // console.log("hunting move");
             let result;
             setTimeout(() => {
                 if (player == this.player) {
@@ -243,7 +266,6 @@ export class GameController {
                 let result;
                 if (player == this.player) {
                     result = this.player1Action(x, y, true);
-                    console.log(result);
                 } else {
                     result = this.player2Action(x, y, true);
                 }
@@ -252,32 +274,7 @@ export class GameController {
                     return;
                 }
 
-                console.log("hit");
-
-                let locatedTarget = board.coords[x][y];
-                player.enemyData.set(locatedTarget, { x: x, y: y });
-
-                // check to see if the adjacent panels are possible
-                let xplus = Number(x) + 1 + "," + y;
-                let xminus = Number(x) - 1 + "," + y;
-                let yminus = x + "," + Number(y - 1);
-                let yplus = x + "," + (Number(y) + 1);
-
-                if (this.isValidCoords(xplus)) {
-                    player.searching.push(xplus);
-                }
-
-                if (this.isValidCoords(xminus)) {
-                    player.searching.push(xminus);
-                }
-
-                if (this.isValidCoords(yplus)) {
-                    player.searching.push(yplus);
-                }
-
-                if (this.isValidCoords(yminus)) {
-                    player.searching.push(yminus);
-                }
+                this.handleAIHit(x, y, board, player);
             }, 1000); // normally is 2750
         }
     }

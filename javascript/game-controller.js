@@ -13,7 +13,7 @@ export class GameController {
         this.player2Board = new GameBoard(2, this.uiController);
 
         // types are real and computer
-        this.player = new Player("computer", this.player1Board);
+        this.player = new Player("real", this.player1Board);
         this.player2 = new Player("computer", this.player2Board);
         this.turn = null;
         this.changeTurn();

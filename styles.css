@@ -10,6 +10,34 @@
   --ship-hover: #cf9f63;
 }
 
+body {
+  background-image: linear-gradient(
+    to bottom right,
+    var(--background2),
+    var(--background3)
+  );
+  width: 100dvw;
+  height: 100dvh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: "Roboto";
+}
+
+.game-board-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10%;
+  height: 80dvh;
+  max-height: 30dvw;
+}
+
 .game-board {
   grid-auto-flow: column;
   height: 100%;
